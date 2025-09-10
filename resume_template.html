@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Your Professional Resume</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #34495e;
+            margin: 20px;
+        }
+        .container {
+            background: #ffffff;
+            max-width: 800px;
+            margin: auto;
+            padding: 25px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #2c3e50;
+        }
+        .header p {
+            margin: 4px 0;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        h2 {
+            background: #3498db;
+            color: #fff;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .section {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section p, .section ul {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+        .skills-list, .certifications-list, .projects-list, .languages-list {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ data['name'] }}</h1>
+            <p>Email: {{ data['email'] }}</p>
+            <p>Phone: {{ data['phone'] }}</p>
+            <p>Address: {{ data['address'] }}</p>
+            {% if data['linkedin'] %}
+            <p>LinkedIn: <a href="{{ data['linkedin'] }}" target="_blank">{{ data['linkedin'] }}</a></p>
+            {% endif %}
+            {% if data['github'] %}
+            <p>GitHub: <a href="{{ data['github'] }}" target="_blank">{{ data['github'] }}</a></p>
+            {% endif %}
+        </div>
+
+        <h2>Education</h2>
+        <div class="section">
+            <p>{{ data['education'] }}</p>
+        </div>
+
+        <h2>Experience</h2>
+        <div class="section">
+            <p>{{ data['experience'] }}</p>
+        </div>
+
+        {% if data['projects'] %}
+        <h2>Projects</h2>
+        <div class="section projects-list">
+            <ul>
+                {% for project in data['projects'].split(',') %}
+                    <li>{{ project.strip() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if data['certifications'] %}
+        <h2>Certifications</h2>
+        <div class="section certifications-list">
+            <ul>
+                {% for cert in data['certifications'].split(',') %}
+                    <li>{{ cert.strip() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <h2>Skills</h2>
+        <div class="section skills-list">
+            <ul>
+                {% for skill in data['skills'].split(',') %}
+                    <li>{{ skill.strip() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if data['languages'] %}
+        <h2>Languages Known</h2>
+        <div class="section languages-list">
+            <ul>
+                {% for lang in data['languages'].split(',') %}
+                    <li>{{ lang.strip() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
